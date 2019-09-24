@@ -1,18 +1,19 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { withWebId, ProviderLogin } from '@inrupt/solid-react-components';
+import { LoginButton, LogoutButton, LoggedIn, LoggedOut, Value } from '@solid/react';
 
 type Props = RouteComponentProps;
 
 export const Consumer: React.FC<Props> = (props) => {
-  const MyComponent = withWebId((webIdProps:any) => {
-    if (webIdProps.webID) {
-      return <> hello {webIdProps.webID} </>;
-    } else {
-      return <ProviderLogin
-        callbackUri={window.location}
-      />;
-    }
-  });
-  return <MyComponent />;
+  return <>
+    <LoggedOut>
+      <LoginButton
+        popup="popup.html"
+      />
+    </LoggedOut>
+    <LoggedIn>
+      Hi <Value src="user.name"/>
+      <LogoutButton/>
+    </LoggedIn>
+  </>;
 };
